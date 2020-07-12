@@ -1,0 +1,12 @@
+{
+  "name": "now-playing-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mat Warger <mwarger@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "app": "cd app && npm run start",
+    "api": "cd api && npm run start",
+    "start": "run-p app api"
+  }
+}
