@@ -12,8 +12,8 @@ type ItemProps = {
 }
 
 type SliderContextProps = {
-  onSelectSlide: any
-  currentSlide: any
+  onSelectSlide: (movie: Movie) => void
+  currentSlide: Movie
   elementRef: any
 }
 
