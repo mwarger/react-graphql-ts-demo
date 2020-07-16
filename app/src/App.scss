@@ -8,8 +8,14 @@ body {
   padding-top: 5px;
 }
 
-h2 {
+.heading {
   font-size: 1.2em;
-  text-transform: uppercase;
   text-align: left;
+
+  &__slider {
+    position: relative;
+    text-transform: uppercase;
+    top: 100px;
+    left: 10px;
+  }
 }
