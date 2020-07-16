@@ -20,6 +20,10 @@ const Content = (props: ContentProps) => {
 
   useLayoutEffect(scrollToBottom, [props]);
 
+  const castList = props.movie.cast?.slice(0, 5).map((cast) =>
+    <li className="content__li" key={cast.id}>{cast.name}</li>
+  );
+
   return (
     <div className="content" ref={scrollRef}>
       <div className="content__background">
@@ -36,6 +40,9 @@ const Content = (props: ContentProps) => {
             {props.movie.overview}
           </div>
 
+          <ul>
+            {castList}
+          </ul>
           <button className="content__button">+ Add to Favorites</button>
         </div>
         <button className="content__close" onClick={props.onClose}>

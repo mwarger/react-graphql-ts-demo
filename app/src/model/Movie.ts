@@ -4,4 +4,10 @@ export interface Movie {
   overview: string;
   poster_path: string;
   backdrop_path: string;
+  cast?: Cast[];
+}
+
+export interface Cast {
+  id: number;
+  name: string;
 }
