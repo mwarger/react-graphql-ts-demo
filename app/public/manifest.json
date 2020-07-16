@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "GraphQL Workshop",
+  "name": "A GraphQL Workshop from Keyhole Software",
   "icons": [
     {
       "src": "favicon.ico",
