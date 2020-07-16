@@ -35,6 +35,8 @@ const Content = (props: ContentProps) => {
           <div className="content__description">
             {props.movie.overview}
           </div>
+
+          <button className="content__button">+ Add to Favorites</button>
         </div>
         <button className="content__close" onClick={props.onClose}>
           <IconCross />
