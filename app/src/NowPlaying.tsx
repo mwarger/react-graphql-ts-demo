@@ -7,14 +7,13 @@ import movies from './mock/now_playing.json';
 import './App.scss';
 
 export const NowPlaying = () => {
-
-    return (
-        <div>
-            <Slider title="Now Playing">
-                {movies.map(movie => (
-                    <Item movie={movie} key={movie.id}></Item>
-                ))}
-            </Slider>
-        </div>
-    );
-}
+  return (
+    <div>
+      <Slider title="Now Playing">
+        {movies.map((movie) => (
+          <Item movie={movie} key={movie.id}></Item>
+        ))}
+      </Slider>
+    </div>
+  );
+};
