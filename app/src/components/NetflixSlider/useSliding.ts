@@ -2,19 +2,20 @@ import { useState, useRef, useEffect } from "react";
 
 const PADDINGS = 110;
 
-const useSliding = (elementWidth, countElements) => {
-  const containerRef = useRef(null);
+const useSliding = (elementWidth: number, countElements: number) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [distance, setDistance] = useState(0);
   const [totalInViewport, setTotalInViewport] = useState(0);
   const [viewed, setViewed] = useState(0);
 
   useEffect(() => {
-    const containerWidth = containerRef.current.clientWidth - PADDINGS;
+    const theRef = containerRef.current;
+    const containerWidth = theRef ? theRef.clientWidth - PADDINGS : 0;
 
     setContainerWidth(containerWidth);
     setTotalInViewport(Math.floor(containerWidth / elementWidth));
-  }, [containerRef.current]);
+  }, [elementWidth, countElements]);
 
   const handlePrev = () => {
     setViewed(viewed - totalInViewport);

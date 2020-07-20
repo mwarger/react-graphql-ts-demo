@@ -9,8 +9,7 @@ export const Popular = () => {
 
     return (
         <div>
-            <h2 className="heading__slider">Popular</h2>
-            <Slider>
+            <Slider title="Popular">
                 {movies.map(movie => (
                     <Item movie={movie} key={movie.id}></Item>
                 ))}

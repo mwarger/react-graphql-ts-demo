@@ -10,8 +10,7 @@ export const NowPlaying = () => {
 
     return (
         <div>
-            <h2 className="heading__slider">Now Playing</h2>
-            <Slider>
+            <Slider title="Now Playing">
                 {movies.map(movie => (
                     <Item movie={movie} key={movie.id}></Item>
                 ))}
