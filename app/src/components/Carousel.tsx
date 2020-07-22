@@ -37,7 +37,6 @@ export const Carousel: FunctionComponent<CarouselProps> = (props) => {
   const handleClose = () => {
     setCurrentMovie(undefined);
     const theRef = titleRef.current;
-    console.log("scrolling to", theRef);
     theRef?.scrollIntoView({ behavior: "smooth" });
   };
 
