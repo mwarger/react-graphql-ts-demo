@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useRef } from "react";
 import cx from "classnames"; // TODO: understand this
-import { CarouselContext, CarouselContextProps } from "./CarouselContext";
-import { CarouselButton } from "./CarouselButton";
 import useCarousel from "./useCarousel";
 import useSizeElement from "./useSizeElement";
+import { CarouselContext, CarouselContextProps } from "./CarouselContext";
+import { CarouselButton } from "./CarouselButton";
 import { MovieDetail } from "./MovieDetail";
 import { Movie } from "model/Movie";
 
