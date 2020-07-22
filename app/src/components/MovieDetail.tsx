@@ -6,9 +6,11 @@ import { Movie } from 'model/Movie';
 
 type MovieDetailProps = {
   movie: Movie;
-  onClose: any; // TODO: remove any
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
 };
 
+// TODO: understand difference FunctionComponent
+// export const MovieDetail = (props: MovieDetailProps) => {
 export const MovieDetail: FunctionComponent<MovieDetailProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 

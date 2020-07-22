@@ -1,5 +1,5 @@
 import React from "react";
-import cx from "classnames"; // TODO: understand this
+import cx from "classnames"; // TODO: understand what this is doing
 import { CarouselContext, CarouselContextProps } from "./CarouselContext";
 import { Movie } from "model/Movie";
 
