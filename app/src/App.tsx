@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './App.scss';
-import { NowPlaying } from './NowPlaying';
-import { Popular } from './Popular';
+import 'App.scss';
+import { NowPlaying } from 'components/NowPlaying';
+import { Popular } from 'components/Popular';
 
-const App = () => {
+export const App = () => {
   return (
     <div className="app">
       <NowPlaying />
@@ -12,5 +12,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;

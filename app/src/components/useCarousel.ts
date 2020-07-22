@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
 const PADDINGS = 110;
 
-const useSliding = (elementWidth: number, countElements: number) => {
+const useCarousel = (elementWidth: number, countElements: number) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [distance, setDistance] = useState(0);
@@ -27,14 +27,21 @@ const useSliding = (elementWidth: number, countElements: number) => {
     setDistance(distance - containerWidth);
   };
 
-  const slideProps = {
+  const carouselProps = {
     style: { transform: `translate3d(${distance}px, 0, 0)` },
   };
 
   const hasPrev = distance < 0;
   const hasNext = viewed + totalInViewport < countElements;
 
-  return { handlePrev, handleNext, slideProps, containerRef, hasPrev, hasNext };
+  return {
+    handlePrev,
+    handleNext,
+    carouselProps,
+    containerRef,
+    hasPrev,
+    hasNext,
+  };
 };
 
-export default useSliding;
+export default useCarousel;

@@ -1,16 +1,15 @@
-import React, { useRef, useLayoutEffect } from 'react';
-import IconCross from '../Icons/IconCross';
-import './Content.scss';
-import { FaPlus } from 'react-icons/fa';
+import React, { useRef, useLayoutEffect, FunctionComponent } from 'react';
+import { FaPlus, FaTimes } from 'react-icons/fa';
+import './MovieDetail.scss';
 
-import { Movie } from '../../model/Movie';
+import { Movie } from 'model/Movie';
 
-type ContentProps = {
+type MovieDetailProps = {
   movie: Movie;
-  onClose: any;
+  onClose: any; // TODO: remove any
 };
 
-const Content = (props: ContentProps) => {
+export const MovieDetail: FunctionComponent<MovieDetailProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -35,7 +34,7 @@ const Content = (props: ContentProps) => {
           style={{
             backgroundImage: `url(${
               'http://image.tmdb.org/t/p/w1280' + props.movie.backdrop_path
-            })`,
+              })`,
           }}
         />
       </div>
@@ -51,11 +50,9 @@ const Content = (props: ContentProps) => {
           </button>
         </div>
         <button className="content__close" onClick={props.onClose}>
-          <IconCross />
+          <FaTimes size="3em" />
         </button>
       </div>
     </div>
   );
 };
-
-export default Content;
