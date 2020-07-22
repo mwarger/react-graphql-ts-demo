@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useRef } from "react";
-import cx from "classnames";
-import SliderContext from "./context";
+import cx from "classnames"; // TODO: understand this
+import { CarouselContext, CarouselContextProps } from "./CarouselContext";
 import { CarouselButton } from "./CarouselButton";
 import useCarousel from "./useCarousel";
 import useSizeElement from "./useSizeElement";
@@ -15,7 +15,7 @@ type CarouselProps = {
 };
 
 export const Carousel: FunctionComponent<CarouselProps> = (props) => {
-  const [currentMovie, setCurrentMovie] = useState<Movie | null>(
+  const [currentMovie, setCurrentMovie] = useState<Movie | undefined>(
     props.activeMovie
   );
   const { width, elementRef } = useSizeElement();
@@ -35,13 +35,13 @@ export const Carousel: FunctionComponent<CarouselProps> = (props) => {
   };
 
   const handleClose = () => {
-    setCurrentMovie(null);
+    setCurrentMovie(undefined);
     const theRef = titleRef.current;
     console.log("scrolling to", theRef);
     theRef?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const contextValue = {
+  const contextValue: CarouselContextProps = {
     onSelectMovie: handleSelect,
     onCloseDetail: handleClose,
     elementRef,
@@ -49,7 +49,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (props) => {
   };
 
   return (
-    <SliderContext.Provider value={contextValue}>
+    <CarouselContext.Provider value={contextValue}>
       <h2 className="heading__slider" ref={titleRef}>
         {props.title}
       </h2>
@@ -63,6 +63,6 @@ export const Carousel: FunctionComponent<CarouselProps> = (props) => {
         {hasNext && <CarouselButton onClick={handleNext} type="next" />}
       </div>
       {currentMovie && <MovieDetail movie={currentMovie} onClose={handleClose} />}
-    </SliderContext.Provider>
+    </CarouselContext.Provider>
   );
 };

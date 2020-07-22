@@ -1,8 +1,6 @@
 import React from "react";
-import cx from "classnames";
-import SliderContext from "./context";
-// import ShowDetailsButton from './ShowDetailsButton'
-// import Mark from "./Mark";
+import cx from "classnames"; // TODO: understand this
+import { CarouselContext, CarouselContextProps } from "./CarouselContext";
 import { Movie } from "model/Movie";
 
 import "./MoviePoster.scss";
@@ -12,15 +10,9 @@ type MoviePosterProps = {
   movie: Movie;
 };
 
-type SliderContextProps = {
-  onSelectMovie: (movie: Movie) => void;
-  currentMovie: Movie;
-  elementRef: any;
-};
-
 export const MoviePoster = (props: MoviePosterProps) => (
-  <SliderContext.Consumer>
-    {(contextProps: SliderContextProps) => {
+  <CarouselContext.Consumer>
+    {(contextProps: CarouselContextProps) => {
       const isActive =
         contextProps.currentMovie &&
         contextProps.currentMovie.id === props.movie.id;
@@ -43,5 +35,5 @@ export const MoviePoster = (props: MoviePosterProps) => (
         </div>
       );
     }}
-  </SliderContext.Consumer>
+  </CarouselContext.Consumer>
 );
