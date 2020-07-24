@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Link, Menu, MenuItem } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,13 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
                 textDecoration: 'none',
                 color: 'grey'
             }
-        }
+        },
     }),
 );
 
 export const MenuAppBar = () => {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -45,8 +46,6 @@ export const MenuAppBar = () => {
         setAnchorEl(null);
     };
 
-    const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
-
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -55,15 +54,18 @@ export const MenuAppBar = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.root}>
-                        <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
-                            Now Playing
-                        </Link>
-                        <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
+                        <NavLink className="link" activeClassName="linkActive" to="/nowPlaying">Now Playing</NavLink>
+                        <NavLink className="link" activeClassName="linkActive" to="/popular">Popular</NavLink>
+                        <NavLink className="link" activeClassName="linkActive" to="/favorites">My Favorites</NavLink>
+                        {/* <Link href="/nowPlaying" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
+                                Now Playing
+                            </Link> */}
+                        {/* <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
                             Popular
                         </Link>
                         <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
                             My Favorites
-                        </Link>
+                        </Link> */}
                     </Typography>
                     {auth && (
                         <div>
