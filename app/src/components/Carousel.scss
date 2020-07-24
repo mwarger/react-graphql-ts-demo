@@ -1,4 +1,4 @@
-.slider {
+.carousel {
   display: flex;
   position: relative;
 
@@ -10,24 +10,33 @@
     width: 100%;
   }
 
-  &:not(&--open) .item:hover .show-details-button {
+  &:not(&--open) .movie-poster:hover .show-details-button {
     opacity: 1;
   }
 
-  &:not(&--open) .item:hover {
+  &:not(&--open) .movie-poster:hover {
     transform: scale(1.5) !important;
   }
 
-  &:not(&--open):hover .item {
+  &:not(&--open):hover .movie-poster {
     transform: translateX(-25%);
   }
 
-  &:not(&--open) .item:hover ~ .item {
+  &:not(&--open) .movie-poster:hover ~ .movie-poster {
     transform: translateX(25%);
+  }
+
+  &__heading {
+    font-size: 1.2em;
+    text-align: left;
+    position: relative;
+    text-transform: uppercase;
+    top: 100px;
+    left: 10px;
   }
 }
 
-.slider-wrapper {
+.carousel-wrapper {
   padding: 100px 0;
   overflow: hidden;
   position: relative;

@@ -20,8 +20,8 @@ export const MoviePoster: FC<MoviePosterProps> = (props: MoviePosterProps) => (
       return (
         <div
           ref={contextProps.elementRef}
-          className={cx("item", {
-            "item--open": isActive,
+          className={cx("movie-poster", {
+            "movie-poster--open": isActive,
           })}
         >
           <img

@@ -49,12 +49,12 @@ export const Carousel: FC<CarouselProps> = (props) => {
 
   return (
     <CarouselContext.Provider value={contextValue}>
-      <h2 className="heading__slider" ref={titleRef}>
+      <h2 className="carousel__heading" ref={titleRef}>
         {props.title}
       </h2>
-      <div className="slider-wrapper">
-        <div className={cx("slider", { "slider--open": currentMovie != null })}>
-          <div ref={containerRef} className="slider__container" {...carouselProps}>
+      <div className="carousel-wrapper">
+        <div className={cx("carousel", { "carousel--open": currentMovie != null })}>
+          <div ref={containerRef} className="carousel__container" {...carouselProps}>
             {props.children}
           </div>
         </div>
