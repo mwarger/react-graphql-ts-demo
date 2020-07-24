@@ -1,5 +1,5 @@
-import React from "react";
-import cx from "classnames"; // TODO: understand what this is doing
+import React, { FC } from "react";
+import cx from "classnames";
 import { CarouselContext, CarouselContextProps } from "./CarouselContext";
 import { Movie } from "model/Movie";
 
@@ -10,7 +10,7 @@ type MoviePosterProps = {
   movie: Movie;
 };
 
-export const MoviePoster = (props: MoviePosterProps) => (
+export const MoviePoster: FC<MoviePosterProps> = (props: MoviePosterProps) => (
   <CarouselContext.Consumer>
     {(contextProps: CarouselContextProps) => {
       const isActive =
@@ -29,8 +29,6 @@ export const MoviePoster = (props: MoviePosterProps) => (
             alt=""
             onClick={() => contextProps.onSelectMovie(props.movie)}
           />
-          {/* <ShowDetailsButton onClick={() => contextProps.onSelectMovie(props.movie)} /> */}
-          {/* {isActive && <Mark />} */}
           {isActive && <div className="mark" />}
         </div>
       );

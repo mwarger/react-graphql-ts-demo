@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState, useRef } from "react";
-import cx from "classnames"; // TODO: understand what this is doing
+import React, { FC, useState, useRef } from "react";
+import cx from "classnames";
 import useCarousel from "./useCarousel";
 import useSizeElement from "./useSizeElement";
 import { CarouselContext, CarouselContextProps } from "./CarouselContext";
@@ -14,7 +14,7 @@ type CarouselProps = {
   activeMovie?: any;
 };
 
-export const Carousel: FunctionComponent<CarouselProps> = (props) => {
+export const Carousel: FC<CarouselProps> = (props) => {
   const [currentMovie, setCurrentMovie] = useState<Movie | undefined>(
     props.activeMovie
   );

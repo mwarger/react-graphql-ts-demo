@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, FunctionComponent } from 'react';
+import React, { useRef, useLayoutEffect, FC } from 'react';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import './MovieDetail.scss';
 
@@ -9,9 +9,7 @@ type MovieDetailProps = {
   onClose: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-// TODO: understand difference FunctionComponent
-// export const MovieDetail = (props: MovieDetailProps) => {
-export const MovieDetail: FunctionComponent<MovieDetailProps> = (props) => {
+export const MovieDetail: FC<MovieDetailProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
