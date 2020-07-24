@@ -70,7 +70,7 @@
   }
 
   &__close {
-    color: #fff;
+    color: lightgray;
     width: 40px;
     height: 40px;
     background: transparent;
@@ -80,6 +80,11 @@
     top: 30px;
     right: 30px;
     cursor: pointer;
+
+    svg:hover {
+      fill: white;
+      cursor: pointer;
+    }
   }
 
   &__button {

@@ -7,11 +7,22 @@
   border: 0;
   outline: 0;
   padding: 0;
+  margin: 100px 0;
   z-index: 4;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover {
+    svg {
+      fill: white;
+    }
+  }
 
   span {
     width: 25px;
-    color: #fff;
+    color: lightgray;
     display: block;
     margin: 0 auto;
   }
