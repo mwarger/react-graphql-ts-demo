@@ -1,31 +1,31 @@
-import _ from "lodash";
+import _ from 'lodash';
 
-export async function users(
+export async function nowPlaying(
   parent: any,
   args: any,
-  context: { dataSources: { userDataSource: { getUsers: () => any } } },
-  info: any
+  context: { dataSources: { movieDataSource: { nowPlaying: () => any } } },
+  info: any,
 ) {
-  const users = await context.dataSources.userDataSource.getUsers();
-  return users;
+  const movies = await context.dataSources.movieDataSource.nowPlaying();
+  return movies;
 }
-export async function userById(
+
+export async function allMovies(
+  parent: any,
+  args: any,
+  context: { dataSources: { movieDataSource: { allMovies: () => any } } },
+  info: any,
+) {
+  const movies = await context.dataSources.movieDataSource.allMovies();
+  return movies;
+}
+
+export async function movieById(
   parent: any,
   { id }: any,
   { dataSources }: any,
-  info: any
+  info: any,
 ) {
-  const user = await dataSources.userDataSource.getUserById(id);
-  return user;
-}
-export async function me(
-  parent: any,
-  { id }: any,
-  { dataSources, user }: any,
-  info: any
-) {
-  if (user) {
-    return dataSources.userDataSource.getUserById(user.sub);
-  }
-  return undefined;
+  const movie = await dataSources.movieDataSource.movieById(id);
+  return movie;
 }
