@@ -10,6 +10,16 @@ export async function nowPlaying(
   return movies;
 }
 
+export async function popular(
+  parent: any,
+  args: any,
+  context: { dataSources: { movieDataSource: { popular: () => any } } },
+  info: any,
+) {
+  const movies = await context.dataSources.movieDataSource.popular();
+  return movies;
+}
+
 export async function movieById(
   parent: any,
   { id }: any,

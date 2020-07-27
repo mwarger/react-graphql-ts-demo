@@ -1,44 +1,47 @@
 import { DataSource } from 'apollo-datasource';
-// import lodashId from "lodash-id";
 
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import Lowdb from 'lowdb';
 
-const nowPlayingAdapter = new FileSync('./data/nowPlaying.json');
-const nowPlayingDatabase = low(nowPlayingAdapter);
-// nowPlayingDatabase._.mixin(lodashId);
-
 const movieAdapter = new FileSync('./data/movies.json');
-const movieDatabase = low(movieAdapter);
+const movieDatabase: any = low(movieAdapter);
 
 const creditAdapter = new FileSync('./data/credits.json');
-const creditDatabase = low(creditAdapter);
+const creditDatabase: any = low(creditAdapter).get('results');
 
 class MovieDataSource extends DataSource {
-  nowPlayingDatabase: any;
-  movieDatabase: any;
-  creditDatabase: any;
-
   constructor() {
     super();
-    this.nowPlayingDatabase = nowPlayingDatabase.get('results');
-    this.movieDatabase = movieDatabase.get('results');
-    this.creditDatabase = creditDatabase.get('results');
   }
 
   initialize(config: any) {}
 
   nowPlaying(args: any) {
-    return this.nowPlayingDatabase.value();
+    return movieDatabase.get('nowPlaying').value();
   }
 
+  popular(args: any) {
+    return movieDatabase.get('popular').value();
+  }
+
+  // NOT REALLY EFFICIENT - BUT WORKS FOR NOW
   movieById(id: number) {
-    return this.movieDatabase.find({ id: +id }).value();
+    let movie = movieDatabase
+      .get('nowPlaying')
+      .find({ id: +id })
+      .value();
+    return (
+      movie ||
+      movieDatabase
+        .get('popular')
+        .find({ id: +id })
+        .value()
+    );
   }
 
   getCredits(movieId: number) {
-    return this.creditDatabase.find({ id: +movieId }).value() || [];
+    return creditDatabase.find({ id: +movieId }).value() || [];
   }
 }
 

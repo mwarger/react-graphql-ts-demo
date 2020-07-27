@@ -19,6 +19,7 @@ export default gql`
 
   type Query {
     nowPlaying: [Movie!]
+    popular: [Movie!]
     movieById(id: ID!): Movie
     cast(movieId: ID!): [Credit]
     # me: User
