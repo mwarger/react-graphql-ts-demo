@@ -57,15 +57,6 @@ export const MenuAppBar = () => {
                         <NavLink className="link" activeClassName="linkActive" to="/nowPlaying">Now Playing</NavLink>
                         <NavLink className="link" activeClassName="linkActive" to="/popular">Popular</NavLink>
                         <NavLink className="link" activeClassName="linkActive" to="/favorites">My Favorites</NavLink>
-                        {/* <Link href="/nowPlaying" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
-                                Now Playing
-                            </Link> */}
-                        {/* <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
-                            Popular
-                        </Link>
-                        <Link href="#" onClick={preventDefault} color="inherit" className={classes.MuiLink}>
-                            My Favorites
-                        </Link> */}
                     </Typography>
                     {auth && (
                         <div>
