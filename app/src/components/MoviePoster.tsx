@@ -4,6 +4,7 @@ import { CarouselContext, CarouselContextProps } from "./CarouselContext";
 import { Movie } from "model/Movie";
 
 import "./MoviePoster.scss";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 type MoviePosterProps = {
   key: number;
@@ -24,6 +25,7 @@ export const MoviePoster: FC<MoviePosterProps> = (props: MoviePosterProps) => (
             "movie-poster--open": isActive,
           })}
         >
+          {props.movie.favorite && <FavoriteIcon className="movie-poster__icon" fontSize="large" />}
           <img
             src={"http://image.tmdb.org/t/p/w342" + props.movie.poster_path}
             alt=""

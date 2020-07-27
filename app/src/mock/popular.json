@@ -16,6 +16,7 @@
     "release_date": "2020-07-10"
   },
   {
+    "favorite": true,
     "popularity": 351.193,
     "vote_count": 148,
     "video": false,
@@ -128,6 +129,7 @@
     "release_date": "2020-02-05"
   },
   {
+    "favorite": true,
     "popularity": 91.91,
     "vote_count": 18898,
     "video": false,

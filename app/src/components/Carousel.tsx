@@ -1,4 +1,5 @@
 import React, { FC, useState, useRef } from "react";
+import { Slide } from '@material-ui/core';
 import cx from "classnames";
 import useCarousel from "./useCarousel";
 import useSizeElement from "./useSizeElement";
@@ -49,18 +50,17 @@ export const Carousel: FC<CarouselProps> = (props) => {
 
   return (
     <CarouselContext.Provider value={contextValue}>
-      <h2 className="carousel__heading" ref={titleRef}>
-        {props.title}
-      </h2>
-      <div className="carousel-wrapper">
-        <div className={cx("carousel", { "carousel--open": currentMovie != null })}>
-          <div ref={containerRef} className="carousel__container" {...carouselProps}>
-            {props.children}
+      <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+        <div className="carousel-wrapper">
+          <div className={cx("carousel", { "carousel--open": currentMovie != null })}>
+            <div ref={containerRef} className="carousel__container" {...carouselProps}>
+              {props.children}
+            </div>
           </div>
+          {hasPrev && <CarouselButton onClick={handlePrev} type="prev" />}
+          {hasNext && <CarouselButton onClick={handleNext} type="next" />}
         </div>
-        {hasPrev && <CarouselButton onClick={handlePrev} type="prev" />}
-        {hasNext && <CarouselButton onClick={handleNext} type="next" />}
-      </div>
+      </Slide>
       {currentMovie && <MovieDetail movie={currentMovie} onClose={handleClose} />}
     </CarouselContext.Provider>
   );

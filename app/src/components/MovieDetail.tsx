@@ -1,8 +1,12 @@
 import React, { useRef, useLayoutEffect, FC } from 'react';
-import { FaPlus, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { red } from '@material-ui/core/colors';
+
 import './MovieDetail.scss';
 
 import { Movie } from 'model/Movie';
+import { Button } from '@material-ui/core';
 
 type MovieDetailProps = {
   movie: Movie;
@@ -44,15 +48,17 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
           <div className="movie-detail__description">{props.movie.overview}</div>
 
           <ul>{castList}</ul>
-          <button className="movie-detail__button">
-            <FaPlus style={{ paddingRight: 10 }} />
-            Add to Favorites
-          </button>
+          <Button variant="contained" startIcon={
+            (props.movie.favorite && <FavoriteIcon style={{ color: red[500] }} />) ||
+            (!props.movie.favorite && <FavoriteIcon />)
+          }>
+            Toggle Favorite
+          </Button>
         </div>
         <button className="movie-detail__close" onClick={props.onClose}>
           <FaTimes size="3em" />
         </button>
       </div>
-    </div>
+    </div >
   );
 };

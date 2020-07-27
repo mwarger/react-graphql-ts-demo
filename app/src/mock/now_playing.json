@@ -1,5 +1,6 @@
 [
   {
+    "favorite": true,
     "popularity": 351.193,
     "vote_count": 148,
     "video": false,
@@ -500,6 +501,7 @@
     "release_date": "2020-05-15"
   },
   {
+    "favorite": true,
     "popularity": 87.111,
     "vote_count": 32,
     "video": false,

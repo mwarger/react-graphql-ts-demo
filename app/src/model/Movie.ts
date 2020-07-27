@@ -5,6 +5,7 @@ export interface Movie {
   poster_path: string;
   backdrop_path: string;
   cast?: Cast[];
+  favorite?: boolean;
 }
 
 export interface Cast {

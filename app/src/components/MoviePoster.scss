@@ -9,6 +9,12 @@
     width: 100%;
     vertical-align: top;
   }
+
+  &__icon {
+    color: red;
+    position: fixed;
+    margin: 10px;
+  }
 }
 
 .mark {
