@@ -12,14 +12,19 @@ const nowPlayingDatabase = low(nowPlayingAdapter);
 const movieAdapter = new FileSync('./data/movies.json');
 const movieDatabase = low(movieAdapter);
 
+const creditAdapter = new FileSync('./data/credits.json');
+const creditDatabase = low(creditAdapter);
+
 class MovieDataSource extends DataSource {
   nowPlayingDatabase: any;
   movieDatabase: any;
+  creditDatabase: any;
 
   constructor() {
     super();
     this.nowPlayingDatabase = nowPlayingDatabase.get('results');
     this.movieDatabase = movieDatabase.get('results');
+    this.creditDatabase = creditDatabase.get('results');
   }
 
   initialize(config: any) {}
@@ -32,17 +37,9 @@ class MovieDataSource extends DataSource {
     return this.movieDatabase.find({ id: +id }).value();
   }
 
-  allMovies() {
-    return this.movieDatabase.value();
+  getCredits(movieId: number) {
+    return this.creditDatabase.find({ id: +movieId }).value() || [];
   }
-
-  // createUser(user: any) {
-  //   return this.db.insert(user).write();
-  // }
-
-  // getUserByEmail(email: any) {
-  //   return this.db.find({ email }).value();
-  // }
 }
 
 export default MovieDataSource;

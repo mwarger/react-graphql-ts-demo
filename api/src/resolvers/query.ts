@@ -10,16 +10,6 @@ export async function nowPlaying(
   return movies;
 }
 
-export async function allMovies(
-  parent: any,
-  args: any,
-  context: { dataSources: { movieDataSource: { allMovies: () => any } } },
-  info: any,
-) {
-  const movies = await context.dataSources.movieDataSource.allMovies();
-  return movies;
-}
-
 export async function movieById(
   parent: any,
   { id }: any,
