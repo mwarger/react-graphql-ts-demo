@@ -9,25 +9,29 @@ import { MenuAppBar } from 'components/MenuAppBar';
 import { NowPlaying } from 'components/NowPlaying';
 import { Popular } from 'components/Popular';
 
+import { ApolloProvider } from "./context/ApolloProvider";
+
 import 'App.scss';
 
 export const App = () => {
 
   return (
     <div className="app">
-      <MuiThemeProvider theme={theme}>
-        <Router>
+      <ApolloProvider>
+        <MuiThemeProvider theme={theme}>
+          <Router>
 
-          <MenuAppBar />
+            <MenuAppBar />
 
-          <Switch>
-            <Route exact={true} path="/nowPlaying" component={NowPlaying} />
-            <Route exaxt={true} path="/popular" component={Popular} />
-            <Redirect from="/" exact to="/nowPlaying" />
-          </Switch>
+            <Switch>
+              <Route exact={true} path="/nowPlaying" component={NowPlaying} />
+              <Route exaxt={true} path="/popular" component={Popular} />
+              <Redirect from="/" exact to="/nowPlaying" />
+            </Switch>
 
-        </Router>
-      </MuiThemeProvider>
+          </Router>
+        </MuiThemeProvider>
+      </ApolloProvider>
     </div>
   );
 };
