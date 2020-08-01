@@ -27,26 +27,26 @@ export default gql`
     # userById: User
   }
 
-  # type User {
-  #   id: String!
-  #   email: String!
-  #   favorites: [Movie!]
-  # }
+  type User {
+    id: String!
+    email: String!
+    favorites: [Movie!]
+  }
 
-  # input Credentials {
-  #   email: String!
-  #   password: String!
-  # }
+  input Credentials {
+    email: String!
+    password: String!
+  }
 
-  # type AuthPayload {
-  #   user: User
-  # }
+  type AuthPayload {
+    user: User
+  }
 
-  # type Mutation {
-  #   toggleFavoriteMovie(movieId: ID!): User
-  #   signUp(credentials: Credentials!): AuthPayload
-  #   signIn(credentials: Credentials!): AuthPayload
-  #   userInfo: AuthPayload
-  #   signOut: AuthPayload
-  # }
+  type Mutation {
+    toggleFavoriteMovie(movieId: ID!): User
+    signUp(credentials: Credentials!): AuthPayload
+    signIn(credentials: Credentials!): AuthPayload
+    userInfo: AuthPayload
+    signOut: AuthPayload
+  }
 `;

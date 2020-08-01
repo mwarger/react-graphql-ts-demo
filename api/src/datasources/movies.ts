@@ -2,7 +2,6 @@ import { DataSource } from 'apollo-datasource';
 
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
-import Lowdb from 'lowdb';
 
 const movieAdapter = new FileSync('./data/movies.json');
 const movieDatabase: any = low(movieAdapter);
