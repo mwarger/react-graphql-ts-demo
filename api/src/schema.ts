@@ -22,7 +22,7 @@ export default gql`
     popular: [Movie!]
     movieById(id: ID!): Movie
     cast(movieId: ID!): [Credit]
-    # me: User
+    me: User
     # users: [User!]
     # userById: User
   }

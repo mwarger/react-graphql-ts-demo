@@ -7,7 +7,7 @@ import './MovieDetail.scss';
 
 import { Movie } from 'model/Movie';
 import { Button } from '@material-ui/core';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 
 const TOGGLE_FAVORITE = gql`
   mutation ToggleFavorite($movieId: ID!) {
@@ -20,16 +20,39 @@ const TOGGLE_FAVORITE = gql`
   }
 `;
 
+const MOVIE_BY_ID = gql`
+  query movieById($id: ID!) {
+    movieById(id: $id) {
+      id
+      title
+      overview
+      poster_path
+      backdrop_path
+      cast {
+        name
+      }
+    }
+    user: me {
+      id
+      favorites {
+        id
+      }
+    }
+  }
+`;
+
 type MovieDetailProps = {
-  movie: Movie;
+  id: string;
   onClose: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const MovieDetail: FC<MovieDetailProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-
+  const { loading, data } = useQuery(MOVIE_BY_ID, {
+    variables: { id: props.id },
+  });
   const [toggle] = useMutation(TOGGLE_FAVORITE, {
-    variables: { movieId: props.movie.id },
+    variables: { movieId: props.id },
   });
 
   const markFavorite = async () => {
@@ -43,7 +66,16 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
 
   useLayoutEffect(scrollToBottom, [props]);
 
-  const castList = props.movie.cast?.slice(0, 5).map((cast) => (
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  const movie = data.movieById as Movie;
+
+  const favorite = data.user?.favorites
+    .map((favorite: Movie) => favorite.id)
+    .includes(movie.id);
+
+  const castList = movie.cast?.slice(0, 5).map((cast) => (
     <li className="content__li" key={cast.name}>
       {cast.name}
     </li>
@@ -57,27 +89,23 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
           className="movie-detail__background__image"
           style={{
             backgroundImage: `url(${
-              'http://image.tmdb.org/t/p/w1280' + props.movie.backdrop_path
+              'http://image.tmdb.org/t/p/w1280' + movie.backdrop_path
             })`,
           }}
         />
       </div>
       <div className="movie-detail__area">
         <div className="movie-detail__area__container">
-          <div className="movie-detail__title">{props.movie.title}</div>
-          <div className="movie-detail__description">
-            {props.movie.overview}
-          </div>
+          <div className="movie-detail__title">{movie.title}</div>
+          <div className="movie-detail__description">{movie.overview}</div>
 
           <ul>{castList}</ul>
           <Button
             onClick={markFavorite}
             variant="contained"
             startIcon={
-              (props.movie.favorite && (
-                <FavoriteIcon style={{ color: red[500] }} />
-              )) ||
-              (!props.movie.favorite && <FavoriteIcon />)
+              (favorite && <FavoriteIcon style={{ color: red[500] }} />) ||
+              (!favorite && <FavoriteIcon />)
             }
           >
             Toggle Favorite

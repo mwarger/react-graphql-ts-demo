@@ -1,14 +1,14 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef } from 'react';
 import { Slide } from '@material-ui/core';
-import cx from "classnames";
-import useCarousel from "./useCarousel";
-import useSizeElement from "./useSizeElement";
-import { CarouselContext, CarouselContextProps } from "./CarouselContext";
-import { CarouselButton } from "./CarouselButton";
-import { MovieDetail } from "./MovieDetail";
-import { Movie } from "model/Movie";
+import cx from 'classnames';
+import useCarousel from './useCarousel';
+import useSizeElement from './useSizeElement';
+import { CarouselContext, CarouselContextProps } from './CarouselContext';
+import { CarouselButton } from './CarouselButton';
+import { MovieDetail } from './MovieDetail';
+import { Movie } from 'model/Movie';
 
-import "./Carousel.scss";
+import './Carousel.scss';
 
 type CarouselProps = {
   title: string;
@@ -17,7 +17,7 @@ type CarouselProps = {
 
 export const Carousel: FC<CarouselProps> = (props) => {
   const [currentMovie, setCurrentMovie] = useState<Movie | undefined>(
-    props.activeMovie
+    props.activeMovie,
   );
   const { width, elementRef } = useSizeElement();
   const {
@@ -38,7 +38,7 @@ export const Carousel: FC<CarouselProps> = (props) => {
   const handleClose = () => {
     setCurrentMovie(undefined);
     const theRef = titleRef.current;
-    theRef?.scrollIntoView({ behavior: "smooth" });
+    theRef?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const contextValue: CarouselContextProps = {
@@ -52,8 +52,16 @@ export const Carousel: FC<CarouselProps> = (props) => {
     <CarouselContext.Provider value={contextValue}>
       <Slide direction="right" in={true} mountOnEnter unmountOnExit>
         <div className="carousel-wrapper">
-          <div className={cx("carousel", { "carousel--open": currentMovie != null })}>
-            <div ref={containerRef} className="carousel__container" {...carouselProps}>
+          <div
+            className={cx('carousel', {
+              'carousel--open': currentMovie != null,
+            })}
+          >
+            <div
+              ref={containerRef}
+              className="carousel__container"
+              {...carouselProps}
+            >
               {props.children}
             </div>
           </div>
@@ -61,7 +69,9 @@ export const Carousel: FC<CarouselProps> = (props) => {
           {hasNext && <CarouselButton onClick={handleNext} type="next" />}
         </div>
       </Slide>
-      {currentMovie && <MovieDetail movie={currentMovie} onClose={handleClose} />}
+      {currentMovie && (
+        <MovieDetail id={currentMovie.id.toString()} onClose={handleClose} />
+      )}
     </CarouselContext.Provider>
   );
 };

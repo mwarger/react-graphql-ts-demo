@@ -29,3 +29,15 @@ export async function movieById(
   const movie = await dataSources.movieDataSource.movieById(id);
   return movie;
 }
+
+export function me(
+  parent: any,
+  { id }: any,
+  { dataSources, user }: any,
+  info: any,
+) {
+  if (user) {
+    return dataSources.userDataSource.getUserById(user.id);
+  }
+  return undefined;
+}

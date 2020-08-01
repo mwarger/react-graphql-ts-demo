@@ -3,7 +3,11 @@
     {
       "id": "abc123",
       "email": "test_user@gmail.com",
-      "favorites": []
+      "favorites": [
+        "385103",
+        "587496",
+        "547016"
+      ]
     }
   ]
 }

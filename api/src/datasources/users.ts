@@ -34,8 +34,6 @@ class UserDataSource extends DataSource {
   }
 
   toggleFavoriteMovie(movieId: string, userId: string) {
-    console.log('userId', userId);
-
     const favorites =
       this.db.find({ id: userId }).get('favorites').value() || [];
 
