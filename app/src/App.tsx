@@ -18,6 +18,7 @@ import { ApolloProvider } from './context/ApolloProvider';
 
 import 'App.scss';
 import { Box, Link } from '@material-ui/core';
+import { Favorites } from './components/Favorites';
 
 export const App = () => {
   return (
@@ -36,12 +37,9 @@ export const App = () => {
               <MenuAppBar />
               <Box>
                 <Switch>
-                  <Route
-                    exact={true}
-                    path="/nowPlaying"
-                    component={NowPlaying}
-                  />
-                  <Route exaxt={true} path="/popular" component={Popular} />
+                  <Route path="/nowPlaying" component={NowPlaying} />
+                  <Route path="/popular" component={Popular} />
+                  <Route path="/favorites" component={Favorites} />
                   <Redirect from="/" exact to="/nowPlaying" />
                 </Switch>
               </Box>
