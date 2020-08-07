@@ -64,7 +64,7 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
     theRef?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useLayoutEffect(scrollToBottom, [props]);
+  useLayoutEffect(scrollToBottom, [data?.movieById?.id]);
 
   if (loading) {
     return <div>Loading...</div>;
