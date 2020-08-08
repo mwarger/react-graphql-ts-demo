@@ -1,15 +1,30 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 export default gql`
   type Movie {
     id: ID!
     title: String!
+    overview: String!
+    backdrop_path: String!
+    poster_path: String!
+    cast: [Credit!]
+  }
+
+  type Credit {
+    id: ID!
+    name: String!
+    character: String!
+    profile_path: String
   }
 
   type Query {
+    nowPlaying: [Movie!]
+    popular: [Movie!]
+    movieById(id: ID!): Movie
+    cast(movieId: ID!): [Credit]
     me: User
-    users: [User!]
-    userById: User
+    # users: [User!]
+    # userById: User
   }
 
   type User {

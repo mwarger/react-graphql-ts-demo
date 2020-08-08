@@ -1,13 +1,11 @@
-require("dotenv").config();
-import { ApolloServer } from "apollo-server-express";
-import MovieDataSource from "./datasources/movies";
-import UserDataSource from "./datasources/users";
+require('dotenv').config();
+import { ApolloServer } from 'apollo-server-express';
+import MovieDataSource from './datasources/movies';
+import UserDataSource from './datasources/users';
 
-import typeDefs from "./schema";
-import resolvers from "./resolvers";
-import { verifyToken } from "./utils/auth";
-import cookieParser from "cookie-parser";
-import express from "express";
+import typeDefs from './schema';
+import resolvers from './resolvers';
+import express from 'express';
 const app = express();
 
 const dataSources = () => ({
@@ -15,18 +13,17 @@ const dataSources = () => ({
   userDataSource: new UserDataSource(),
 });
 
-app.use(cookieParser());
+export type UserType = {
+  id: string;
+  email: string;
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources,
   context: ({ req, res }) => {
-    let user = null;
-    if (req.cookies.token) {
-      const payload = verifyToken(req.cookies.token);
-      user = payload;
-    }
+    let user = { id: 'abc123', email: 'test_user@gmail.com' };
 
     return { user, res };
   },
