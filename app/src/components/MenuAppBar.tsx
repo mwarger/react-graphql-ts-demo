@@ -73,13 +73,6 @@ export const MenuAppBar = () => {
             >
               Popular
             </NavLink>
-            <NavLink
-              className="link"
-              activeClassName="linkActive"
-              to="/favorites"
-            >
-              My Favorites
-            </NavLink>
           </Typography>
           {auth && (
             <div>

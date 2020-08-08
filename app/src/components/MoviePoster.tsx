@@ -9,7 +9,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 type MoviePosterProps = {
   key: number;
   movie: Movie;
-  favorite: boolean;
 };
 
 export const MoviePoster: FC<MoviePosterProps> = (props: MoviePosterProps) => (
@@ -26,7 +25,7 @@ export const MoviePoster: FC<MoviePosterProps> = (props: MoviePosterProps) => (
             'movie-poster--open': isActive,
           })}
         >
-          {props.favorite && (
+          {props.movie.favorite && (
             <FavoriteIcon className="movie-poster__icon" fontSize="large" />
           )}
           <img

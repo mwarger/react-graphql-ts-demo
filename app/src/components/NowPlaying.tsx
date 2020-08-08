@@ -3,8 +3,6 @@ import React from 'react';
 import { Carousel } from './Carousel';
 import { MoviePoster } from 'components/MoviePoster';
 
-// import movies from 'mock/now_playing.json';
-
 import { gql, useQuery } from '@apollo/client';
 import { Movie } from 'model/Movie';
 
@@ -16,14 +14,10 @@ const NOW_PLAYING = gql`
       overview
       poster_path
       backdrop_path
+      favorite
+      popularity
       cast {
         name
-      }
-    }
-    user: me {
-      id
-      favorites {
-        id
       }
     }
   }
@@ -38,15 +32,7 @@ export const NowPlaying = () => {
   return (
     <Carousel title="Now Playing">
       {data.nowPlaying.map((movie: Movie) => (
-        <MoviePoster
-          movie={{
-            ...movie,
-          }}
-          favorite={data.user?.favorites
-            .map((favorite: Movie) => favorite.id)
-            .includes(movie.id)}
-          key={movie.id}
-        ></MoviePoster>
+        <MoviePoster movie={movie} key={movie.id}></MoviePoster>
       ))}
     </Carousel>
   );

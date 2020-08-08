@@ -13,9 +13,7 @@ const TOGGLE_FAVORITE = gql`
   mutation ToggleFavorite($movieId: ID!) {
     toggleFavoriteMovie(movieId: $movieId) {
       id
-      favorites {
-        id
-      }
+      favorite
     }
   }
 `;
@@ -28,14 +26,9 @@ const MOVIE_BY_ID = gql`
       overview
       poster_path
       backdrop_path
+      favorite
       cast {
         name
-      }
-    }
-    user: me {
-      id
-      favorites {
-        id
       }
     }
   }
@@ -71,10 +64,6 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
   }
   const movie = data.movieById as Movie;
 
-  const favorite = data.user?.favorites
-    .map((favorite: Movie) => favorite.id)
-    .includes(movie.id);
-
   const castList = movie.cast?.slice(0, 5).map((cast) => (
     <li className="content__li" key={cast.name}>
       {cast.name}
@@ -104,8 +93,9 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
             onClick={markFavorite}
             variant="contained"
             startIcon={
-              (favorite && <FavoriteIcon style={{ color: red[500] }} />) ||
-              (!favorite && <FavoriteIcon />)
+              <FavoriteIcon
+                style={{ color: movie.favorite ? red[500] : undefined }}
+              />
             }
           >
             Toggle Favorite

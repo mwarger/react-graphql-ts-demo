@@ -6,8 +6,6 @@ import { MoviePoster } from 'components/MoviePoster';
 import { gql, useQuery } from '@apollo/client';
 import { Movie } from 'model/Movie';
 
-// import movies from 'mock/popular.json';
-
 const POPULAR = gql`
   query popular {
     popular {
@@ -16,14 +14,10 @@ const POPULAR = gql`
       overview
       poster_path
       backdrop_path
+      favorite
+      popularity
       cast {
         name
-      }
-    }
-    user: me {
-      id
-      favorites {
-        id
       }
     }
   }
@@ -38,13 +32,7 @@ export const Popular = () => {
   return (
     <Carousel title="Popular">
       {data.popular.map((movie: Movie) => (
-        <MoviePoster
-          movie={movie}
-          favorite={data.user?.favorites
-            .map((favorite: Movie) => favorite.id)
-            .includes(movie.id)}
-          key={movie.id}
-        ></MoviePoster>
+        <MoviePoster movie={movie} key={movie.id}></MoviePoster>
       ))}
     </Carousel>
   );

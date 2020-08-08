@@ -4,6 +4,8 @@ export interface Movie {
   overview: string;
   poster_path: string;
   backdrop_path: string;
+  popularity: number;
+  favorite: boolean;
   cast?: Cast[];
 }
 
