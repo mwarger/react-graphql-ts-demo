@@ -7,20 +7,21 @@ import { MoviePoster } from '../components/slider/MoviePoster';
 import { Movie } from '../model/Movie';
 
 const POPULAR = gql`
-  query popular {
-    popular {
-      id
-      title
-      overview
-      poster_path
-      backdrop_path
-      favorite
-      popularity
-      cast {
-        name
-      }
-    }
-  }
+  # fill me in
+  # query popular {
+  #   popular {
+  #     id
+  #     title
+  #     overview
+  #     poster_path
+  #     backdrop_path
+  #     favorite
+  #     popularity
+  #     # cast {
+  #     #   name
+  #     # }
+  #   }
+  # }
 `;
 
 export const Popular = () => {
@@ -31,7 +32,7 @@ export const Popular = () => {
 
   return (
     <Carousel title="Popular">
-      {data.popular.map((movie: Movie) => (
+      {data.popular?.map((movie: Movie) => (
         <MoviePoster movie={movie} key={movie.id}></MoviePoster>
       ))}
     </Carousel>

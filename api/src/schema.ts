@@ -9,7 +9,7 @@ export default gql`
     poster_path: String!
     popularity: String
     favorite: Boolean
-    cast: [Credit!]
+    # cast: [Credit!]
   }
 
   type Credit {
@@ -20,13 +20,14 @@ export default gql`
   }
 
   type Query {
+    hello: String
     nowPlaying: [Movie!]
-    popular: [Movie!]
-    movieById(id: ID!): Movie
-    cast(movieId: ID!): [Credit]
+    # popular: [Movie!]
+    # movieById(id: ID!): Movie
+    # cast(movieId: ID!): [Credit]
   }
 
-  type Mutation {
-    toggleFavoriteMovie(movieId: ID!): Movie
-  }
+  # type Mutation {
+  # toggleFavoriteMovie(movieId: ID!): Movie
+  # }
 `;

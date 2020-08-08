@@ -16,9 +16,9 @@ const NOW_PLAYING = gql`
       backdrop_path
       favorite
       popularity
-      cast {
-        name
-      }
+      # cast {
+      #   name
+      # }
     }
   }
 `;
