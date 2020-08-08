@@ -33,7 +33,7 @@ class MovieDataSource extends DataSource {
   }
 
   nowPlaying() {
-    return movieDatabase.sortBy('title').value();
+    return movieDatabase.value();
   }
 
   popular() {

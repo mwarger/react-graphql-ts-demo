@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { Context } from '../server';
 
 export async function nowPlaying(
@@ -7,8 +6,7 @@ export async function nowPlaying(
   context: Context,
   _info: any,
 ) {
-  const movies = await context.dataSources.movieDataSource.nowPlaying();
-  return movies;
+  return context.dataSources.movieDataSource.nowPlaying();
 }
 
 export async function popular(
@@ -17,8 +15,7 @@ export async function popular(
   context: Context,
   _info: any,
 ) {
-  const movies = await context.dataSources.movieDataSource.popular();
-  return movies;
+  return context.dataSources.movieDataSource.popular();
 }
 
 export async function movieById(
@@ -27,6 +24,5 @@ export async function movieById(
   { dataSources }: Context,
   _info: any,
 ) {
-  const movie = await dataSources.movieDataSource.movieById(id);
-  return movie;
+  return dataSources.movieDataSource.movieById(id);
 }

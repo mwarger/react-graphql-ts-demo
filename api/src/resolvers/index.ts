@@ -1,5 +1,7 @@
 import * as Query from './query';
 import * as Mutation from './mutation';
-const resolvers = { Query, Mutation };
+import * as Movie from './movie';
+
+const resolvers = { Query, Mutation, Movie };
 
 export default resolvers;
