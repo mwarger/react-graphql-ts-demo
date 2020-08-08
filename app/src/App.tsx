@@ -1,8 +1,8 @@
 import React from 'react';
+import './App.scss';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { theme } from 'theme/Theme';
-
+import { theme } from './theme/Theme';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,13 +10,12 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import { MenuAppBar } from 'components/MenuAppBar';
-import { NowPlaying } from 'components/NowPlaying';
-import { Popular } from 'components/Popular';
+import { MenuAppBar } from './pages/MenuAppBar';
+import { NowPlaying } from './pages/NowPlaying';
+import { Popular } from './pages/Popular';
 
 import { ApolloProvider } from './context/ApolloProvider';
 
-import 'App.scss';
 import { Box, Link } from '@material-ui/core';
 
 export const App = () => {
@@ -38,7 +37,7 @@ export const App = () => {
                 <Switch>
                   <Route path="/nowPlaying" component={NowPlaying} />
                   <Route path="/popular" component={Popular} />
-                  <Redirect from="/" exact to="/nowPlaying" />
+                  <Redirect from="/" to="/nowPlaying" />
                 </Switch>
               </Box>
               <Box p={2}>

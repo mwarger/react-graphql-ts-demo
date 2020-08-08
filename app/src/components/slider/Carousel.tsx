@@ -5,8 +5,8 @@ import useCarousel from './useCarousel';
 import useSizeElement from './useSizeElement';
 import { CarouselContext, CarouselContextProps } from './CarouselContext';
 import { CarouselButton } from './CarouselButton';
-import { MovieDetail } from './MovieDetail';
-import { Movie } from 'model/Movie';
+import { MovieDetail } from '../MovieDetail';
+import { Movie } from '../../model/Movie';
 
 import './Carousel.scss';
 

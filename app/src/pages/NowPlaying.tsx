@@ -1,10 +1,10 @@
 import React from 'react';
-
-import { Carousel } from './Carousel';
-import { MoviePoster } from 'components/MoviePoster';
-
 import { gql, useQuery } from '@apollo/client';
-import { Movie } from 'model/Movie';
+
+import { Carousel } from '../components/slider/Carousel';
+import { MoviePoster } from '../components/slider/MoviePoster';
+
+import { Movie } from '../model/Movie';
 
 const NOW_PLAYING = gql`
   query nowPlaying {
