@@ -22,7 +22,7 @@ export default gql`
   type Query {
     hello: String
     nowPlaying: [Movie!]
-    # popular: [Movie!]
+    popular: [Movie!]
     # movieById(id: ID!): Movie
     # cast(movieId: ID!): [Credit]
   }

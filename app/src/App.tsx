@@ -12,7 +12,7 @@ import {
 
 import { MenuAppBar } from './pages/MenuAppBar';
 import { NowPlaying } from './pages/NowPlaying';
-// import { Popular } from './pages/Popular';
+import { Popular } from './pages/Popular';
 
 import { ApolloProvider } from './context/ApolloProvider';
 
@@ -36,7 +36,7 @@ export const App = () => {
               <Box>
                 <Switch>
                   <Route path="/nowPlaying" component={NowPlaying} />
-                  {/* <Route path="/popular" component={Popular} /> */}
+                  <Route path="/popular" component={Popular} />
                   <Redirect from="/" to="/nowPlaying" />
                 </Switch>
               </Box>

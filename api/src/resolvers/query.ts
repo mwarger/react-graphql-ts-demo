@@ -13,14 +13,14 @@ export async function nowPlaying(
   return context.dataSources.movieDataSource.nowPlaying();
 }
 
-// export async function popular(
-//   _parent: any,
-//   _args: any,
-//   context: Context,
-//   _info: any,
-// ) {
-//   return context.dataSources.movieDataSource.popular();
-// }
+export async function popular(
+  _parent: any,
+  _args: any,
+  context: Context,
+  _info: any,
+) {
+  return context.dataSources.movieDataSource.popular();
+}
 
 // export async function movieById(
 //   _parent: any,

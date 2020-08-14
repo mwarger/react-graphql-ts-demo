@@ -8,20 +8,20 @@ import { Movie } from '../model/Movie';
 
 const POPULAR = gql`
   # fill me in
-  # query popular {
-  #   popular {
-  #     id
-  #     title
-  #     overview
-  #     poster_path
-  #     backdrop_path
-  #     favorite
-  #     popularity
-  #     # cast {
-  #     #   name
-  #     # }
-  #   }
-  # }
+  query popular {
+    popular {
+      id
+      title
+      overview
+      poster_path
+      backdrop_path
+      favorite
+      popularity
+      # cast {
+      #   name
+      # }
+    }
+  }
 `;
 
 export const Popular = () => {
