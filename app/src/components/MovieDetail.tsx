@@ -27,9 +27,9 @@ const MOVIE_BY_ID = gql`
       poster_path
       backdrop_path
       favorite
-      cast {
-        name
-      }
+      # cast {
+      #   name
+      # }
     }
   }
 `;
@@ -60,11 +60,11 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
   useLayoutEffect(scrollToBottom, [data?.movieById?.id]);
 
   const movie = data?.movieById as Movie;
-  // const castList = movie?.cast?.slice(0, 5).map((cast) => (
-  //   <li className="content__li" key={cast.name}>
-  //     {cast.name}
-  //   </li>
-  // ));
+  const castList = movie?.cast?.slice(0, 5).map((cast) => (
+    <li className="content__li" key={cast.name}>
+      {cast.name}
+    </li>
+  ));
 
   if (!movie) {
     return null;
@@ -92,7 +92,7 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
           <div className="movie-detail__title">{movie.title}</div>
           <div className="movie-detail__description">{movie.overview}</div>
 
-          {/* <ul>{castList}</ul> */}
+          <ul>{castList}</ul>
           <Button
             onClick={markFavorite}
             variant="contained"

@@ -22,11 +22,11 @@ export async function popular(
   return context.dataSources.movieDataSource.popular();
 }
 
-// export async function movieById(
-//   _parent: any,
-//   { id }: { id: number },
-//   { dataSources }: Context,
-//   _info: any,
-// ) {
-//   return dataSources.movieDataSource.movieById(id);
-// }
+export async function movieById(
+  _parent: any,
+  { id }: { id: number },
+  { dataSources }: Context,
+  _info: any,
+) {
+  return dataSources.movieDataSource.movieById(id);
+}

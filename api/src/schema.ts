@@ -23,7 +23,7 @@ export default gql`
     hello: String
     nowPlaying: [Movie!]
     popular: [Movie!]
-    # movieById(id: ID!): Movie
+    movieById(id: ID!): Movie
     # cast(movieId: ID!): [Credit]
   }
 
