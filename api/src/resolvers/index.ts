@@ -3,7 +3,6 @@ import * as Mutation from './mutation';
 // import * as Movie from './movie';
 
 // const resolvers = { Query, Mutation, Movie };
-// const resolvers = { Query, Mutation };
-const resolvers = { Query };
+const resolvers = { Query, Mutation };
 
 export default resolvers;

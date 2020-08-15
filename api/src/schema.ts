@@ -27,7 +27,7 @@ export default gql`
     # cast(movieId: ID!): [Credit]
   }
 
-  # type Mutation {
-  # toggleFavoriteMovie(movieId: ID!): Movie
-  # }
+  type Mutation {
+    toggleFavoriteMovie(movieId: ID!): Movie
+  }
 `;
