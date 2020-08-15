@@ -27,9 +27,10 @@ const MOVIE_BY_ID = gql`
       poster_path
       backdrop_path
       favorite
-      # cast {
-      #   name
-      # }
+      cast {
+        id
+        name
+      }
     }
   }
 `;
@@ -60,6 +61,7 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
   useLayoutEffect(scrollToBottom, [data?.movieById?.id]);
 
   const movie = data?.movieById as Movie;
+
   const castList = movie?.cast?.slice(0, 5).map((cast) => (
     <li className="content__li" key={cast.name}>
       {cast.name}
