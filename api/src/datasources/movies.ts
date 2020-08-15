@@ -1,4 +1,4 @@
-import { DataSource } from 'apollo-datasource';
+import { RESTDataSource } from 'apollo-datasource-rest';
 
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
@@ -27,39 +27,48 @@ interface Movie {
   cast?: Credit[];
 }
 
-class MovieDataSource extends DataSource {
+class MovieDataSource extends RESTDataSource {
+  apiKey: string = '';
   constructor() {
     super();
+    this.baseURL = 'https://api.themoviedb.org/3/';
+    this.apiKey = String(process.env.TMDB_API_KEY);
   }
 
-  nowPlaying() {
-    return movieDatabase.value();
+  async nowPlaying() {
+    const response = await this.get(
+      `movie/now_playing?api_key=${this.apiKey}&language=en-US&page=1`,
+    );
+
+    return response.results || [];
   }
 
-  popular() {
-    return movieDatabase
-      .filter((movie: Movie) => movie.popularity > 100)
-      .sortBy('popularity')
-      .value()
-      .reverse();
+  async popular() {
+    const response = await this.get(
+      `movie/popular?api_key=${this.apiKey}&language=en-US&page=1`,
+    );
+
+    return response.results || [];
   }
 
-  movieById(id: number) {
-    let movie = movieDatabase.find({ id: +id }).value();
-    return movie || movieDatabase.find({ id }).value();
+  async movieById(id: number) {
+    const response = await this.get(
+      `movie/${id}?api_key=${this.apiKey}&language=en-US`,
+    );
+
+    return response;
   }
 
-  getCredits(id: number) {
-    return creditDatabase.find({ id: +id }).value() || [];
+  async getCredits(id: number) {
+    const response = await this.get(
+      `movie/${id}/credits?api_key=${this.apiKey}&language=en-US`,
+    );
+
+    return response;
   }
 
   toggleFavorite(id: number) {
-    const movie = movieDatabase.find({ id: +id }).value();
-
-    return movieDatabase
-      .find({ id: +id })
-      .assign({ favorite: !movie.favorite })
-      .write();
+    // implement me
   }
 }
 

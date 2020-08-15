@@ -5,7 +5,7 @@ export default gql`
     id: ID!
     title: String!
     overview: String!
-    backdrop_path: String!
+    backdrop_path: String
     poster_path: String!
     popularity: String
     favorite: Boolean

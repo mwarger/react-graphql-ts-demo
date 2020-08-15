@@ -1,9 +1,10 @@
 import { Context } from '../server';
 
-export function cast(
+export async function cast(
   movie: { id: number },
   _args: any,
   { dataSources }: Context,
 ) {
-  return dataSources.movieDataSource.getCredits(movie.id).cast || [];
+  const credits = await dataSources.movieDataSource.getCredits(movie.id);
+  return credits.cast || [];
 }
