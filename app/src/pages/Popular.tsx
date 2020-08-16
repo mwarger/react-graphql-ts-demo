@@ -1,38 +1,18 @@
 import React from 'react';
-import { gql, useQuery } from '@apollo/client';
 
 import { Carousel } from '../components/slider/Carousel';
 import { MoviePoster } from '../components/slider/MoviePoster';
-
-import { Movie } from '../model/Movie';
-
-const POPULAR = gql`
-  # fill me in
-  query popular {
-    popular {
-      id
-      title
-      overview
-      poster_path
-      backdrop_path
-      favorite
-      popularity
-      # cast {
-      #   name
-      # }
-    }
-  }
-`;
+import { usePopularQuery } from '../generated/graphql';
 
 export const Popular = () => {
-  const { loading, error, data } = useQuery(POPULAR);
+  const { loading, error, data } = usePopularQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
     <Carousel title="Popular">
-      {data.popular?.map((movie: Movie) => (
+      {data?.popular?.map((movie) => (
         <MoviePoster movie={movie} key={movie.id}></MoviePoster>
       ))}
     </Carousel>

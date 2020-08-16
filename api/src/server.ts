@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import MovieDataSource from './datasources/movies';
 
 import typeDefs from './schema';
-import resolvers from './resolvers';
+import resolvers from './resolvers/resolvers';
 import express from 'express';
 const app = express();
 
@@ -13,13 +13,13 @@ export interface Context {
   };
 }
 
-const dataSources = () => ({
+const dataSources = (): Context['dataSources'] => ({
   movieDataSource: new MovieDataSource(),
 });
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers: resolvers as any,
   dataSources,
 });
 

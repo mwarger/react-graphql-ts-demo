@@ -5,35 +5,11 @@ import { red } from '@material-ui/core/colors';
 
 import './MovieDetail.scss';
 
-import { Movie } from '../model/Movie';
 import { Button } from '@material-ui/core';
-import { gql, useMutation, useQuery } from '@apollo/client';
-
-const TOGGLE_FAVORITE = gql`
-  mutation ToggleFavorite($movieId: ID!) {
-    toggleFavoriteMovie(movieId: $movieId) {
-      id
-      favorite
-    }
-  }
-`;
-
-const MOVIE_BY_ID = gql`
-  query movieById($id: ID!) {
-    movieById(id: $id) {
-      id
-      title
-      overview
-      poster_path
-      backdrop_path
-      favorite
-      cast {
-        id
-        name
-      }
-    }
-  }
-`;
+import {
+  useMovieByIdQuery,
+  useToggleFavoriteMutation,
+} from '../generated/graphql';
 
 type MovieDetailProps = {
   id: string;
@@ -42,10 +18,13 @@ type MovieDetailProps = {
 
 export const MovieDetail: FC<MovieDetailProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { loading, data } = useQuery(MOVIE_BY_ID, {
-    variables: { id: props.id },
+  const { loading, data } = useMovieByIdQuery({
+    variables: {
+      id: props.id,
+    },
   });
-  const [toggle] = useMutation(TOGGLE_FAVORITE, {
+
+  const [toggle] = useToggleFavoriteMutation({
     variables: { movieId: props.id },
   });
 
@@ -60,7 +39,7 @@ export const MovieDetail: FC<MovieDetailProps> = (props) => {
 
   useLayoutEffect(scrollToBottom, [data?.movieById?.id]);
 
-  const movie = data?.movieById as Movie;
+  const movie = data?.movieById;
 
   const castList = movie?.cast?.slice(0, 5).map((cast) => (
     <li className="content__li" key={cast.name}>

@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import cx from 'classnames';
 import { CarouselContext, CarouselContextProps } from './CarouselContext';
-import { Movie } from '../../model/Movie';
 
 import './MoviePoster.scss';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Movie } from '../../generated/graphql';
 
 type MoviePosterProps = {
-  key: number;
   movie: Movie;
 };
 
