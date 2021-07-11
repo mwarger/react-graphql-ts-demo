@@ -10,10 +10,11 @@ export const NowPlaying = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
+  const movies = data?.nowPlaying ?? [];
   return (
     <Carousel title="Now Playing">
-      {data?.nowPlaying?.map((movie: Movie) => (
-        <MoviePoster movie={movie} key={movie.id}></MoviePoster>
+      {movies.map((movie) => (
+        <MoviePoster movie={movie} key={movie.id} />
       ))}
     </Carousel>
   );

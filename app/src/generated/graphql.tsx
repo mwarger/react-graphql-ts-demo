@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -68,19 +69,6 @@ export enum CacheControlScope {
 }
 
 
-export type ToggleFavoriteMutationVariables = Exact<{
-  movieId: Scalars['ID'];
-}>;
-
-
-export type ToggleFavoriteMutation = (
-  { __typename?: 'Mutation' }
-  & { toggleFavoriteMovie?: Maybe<(
-    { __typename?: 'Movie' }
-    & Pick<Movie, 'id' | 'favorite'>
-  )> }
-);
-
 export type MovieByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -98,6 +86,19 @@ export type MovieByIdQuery = (
   )> }
 );
 
+export type ToggleFavoriteMutationVariables = Exact<{
+  movieId: Scalars['ID'];
+}>;
+
+
+export type ToggleFavoriteMutation = (
+  { __typename?: 'Mutation' }
+  & { toggleFavoriteMovie?: Maybe<(
+    { __typename?: 'Movie' }
+    & Pick<Movie, 'id' | 'favorite'>
+  )> }
+);
+
 export type NowPlayingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -106,6 +107,10 @@ export type NowPlayingQuery = (
   & { nowPlaying?: Maybe<Array<(
     { __typename?: 'Movie' }
     & Pick<Movie, 'id' | 'title' | 'overview' | 'poster_path' | 'backdrop_path' | 'favorite' | 'popularity'>
+    & { cast?: Maybe<Array<(
+      { __typename?: 'Credit' }
+      & Pick<Credit, 'name'>
+    )>> }
   )>> }
 );
 
@@ -117,43 +122,14 @@ export type PopularQuery = (
   & { popular?: Maybe<Array<(
     { __typename?: 'Movie' }
     & Pick<Movie, 'id' | 'title' | 'overview' | 'poster_path' | 'backdrop_path' | 'favorite' | 'popularity'>
+    & { cast?: Maybe<Array<(
+      { __typename?: 'Credit' }
+      & Pick<Credit, 'name'>
+    )>> }
   )>> }
 );
 
 
-export const ToggleFavoriteDocument = gql`
-    mutation ToggleFavorite($movieId: ID!) {
-  toggleFavoriteMovie(movieId: $movieId) {
-    id
-    favorite
-  }
-}
-    `;
-export type ToggleFavoriteMutationFn = Apollo.MutationFunction<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>;
-
-/**
- * __useToggleFavoriteMutation__
- *
- * To run a mutation, you first call `useToggleFavoriteMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useToggleFavoriteMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [toggleFavoriteMutation, { data, loading, error }] = useToggleFavoriteMutation({
- *   variables: {
- *      movieId: // value for 'movieId'
- *   },
- * });
- */
-export function useToggleFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>) {
-        return Apollo.useMutation<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>(ToggleFavoriteDocument, baseOptions);
-      }
-export type ToggleFavoriteMutationHookResult = ReturnType<typeof useToggleFavoriteMutation>;
-export type ToggleFavoriteMutationResult = Apollo.MutationResult<ToggleFavoriteMutation>;
-export type ToggleFavoriteMutationOptions = Apollo.BaseMutationOptions<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>;
 export const MovieByIdDocument = gql`
     query movieById($id: ID!) {
   movieById(id: $id) {
@@ -187,15 +163,51 @@ export const MovieByIdDocument = gql`
  *   },
  * });
  */
-export function useMovieByIdQuery(baseOptions?: Apollo.QueryHookOptions<MovieByIdQuery, MovieByIdQueryVariables>) {
-        return Apollo.useQuery<MovieByIdQuery, MovieByIdQueryVariables>(MovieByIdDocument, baseOptions);
+export function useMovieByIdQuery(baseOptions: Apollo.QueryHookOptions<MovieByIdQuery, MovieByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MovieByIdQuery, MovieByIdQueryVariables>(MovieByIdDocument, options);
       }
 export function useMovieByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MovieByIdQuery, MovieByIdQueryVariables>) {
-          return Apollo.useLazyQuery<MovieByIdQuery, MovieByIdQueryVariables>(MovieByIdDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MovieByIdQuery, MovieByIdQueryVariables>(MovieByIdDocument, options);
         }
 export type MovieByIdQueryHookResult = ReturnType<typeof useMovieByIdQuery>;
 export type MovieByIdLazyQueryHookResult = ReturnType<typeof useMovieByIdLazyQuery>;
 export type MovieByIdQueryResult = Apollo.QueryResult<MovieByIdQuery, MovieByIdQueryVariables>;
+export const ToggleFavoriteDocument = gql`
+    mutation ToggleFavorite($movieId: ID!) {
+  toggleFavoriteMovie(movieId: $movieId) {
+    id
+    favorite
+  }
+}
+    `;
+export type ToggleFavoriteMutationFn = Apollo.MutationFunction<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>;
+
+/**
+ * __useToggleFavoriteMutation__
+ *
+ * To run a mutation, you first call `useToggleFavoriteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useToggleFavoriteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [toggleFavoriteMutation, { data, loading, error }] = useToggleFavoriteMutation({
+ *   variables: {
+ *      movieId: // value for 'movieId'
+ *   },
+ * });
+ */
+export function useToggleFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>(ToggleFavoriteDocument, options);
+      }
+export type ToggleFavoriteMutationHookResult = ReturnType<typeof useToggleFavoriteMutation>;
+export type ToggleFavoriteMutationResult = Apollo.MutationResult<ToggleFavoriteMutation>;
+export type ToggleFavoriteMutationOptions = Apollo.BaseMutationOptions<ToggleFavoriteMutation, ToggleFavoriteMutationVariables>;
 export const NowPlayingDocument = gql`
     query nowPlaying {
   nowPlaying {
@@ -206,6 +218,9 @@ export const NowPlayingDocument = gql`
     backdrop_path
     favorite
     popularity
+    cast {
+      name
+    }
   }
 }
     `;
@@ -226,10 +241,12 @@ export const NowPlayingDocument = gql`
  * });
  */
 export function useNowPlayingQuery(baseOptions?: Apollo.QueryHookOptions<NowPlayingQuery, NowPlayingQueryVariables>) {
-        return Apollo.useQuery<NowPlayingQuery, NowPlayingQueryVariables>(NowPlayingDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<NowPlayingQuery, NowPlayingQueryVariables>(NowPlayingDocument, options);
       }
 export function useNowPlayingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NowPlayingQuery, NowPlayingQueryVariables>) {
-          return Apollo.useLazyQuery<NowPlayingQuery, NowPlayingQueryVariables>(NowPlayingDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<NowPlayingQuery, NowPlayingQueryVariables>(NowPlayingDocument, options);
         }
 export type NowPlayingQueryHookResult = ReturnType<typeof useNowPlayingQuery>;
 export type NowPlayingLazyQueryHookResult = ReturnType<typeof useNowPlayingLazyQuery>;
@@ -244,6 +261,9 @@ export const PopularDocument = gql`
     backdrop_path
     favorite
     popularity
+    cast {
+      name
+    }
   }
 }
     `;
@@ -264,10 +284,12 @@ export const PopularDocument = gql`
  * });
  */
 export function usePopularQuery(baseOptions?: Apollo.QueryHookOptions<PopularQuery, PopularQueryVariables>) {
-        return Apollo.useQuery<PopularQuery, PopularQueryVariables>(PopularDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PopularQuery, PopularQueryVariables>(PopularDocument, options);
       }
 export function usePopularLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PopularQuery, PopularQueryVariables>) {
-          return Apollo.useLazyQuery<PopularQuery, PopularQueryVariables>(PopularDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PopularQuery, PopularQueryVariables>(PopularDocument, options);
         }
 export type PopularQueryHookResult = ReturnType<typeof usePopularQuery>;
 export type PopularLazyQueryHookResult = ReturnType<typeof usePopularLazyQuery>;
