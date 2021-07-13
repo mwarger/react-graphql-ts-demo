@@ -10,9 +10,8 @@ const resolvers: {
   Movie: MovieResolvers;
 } = {
   Query: {
-    hello() {
-      return 'world';
-    },
+    // TODO: what possible resolvers exist?
+
     nowPlaying(_parent, _args, context, _info) {
       return context.dataSources.movieDataSource.nowPlaying();
     },

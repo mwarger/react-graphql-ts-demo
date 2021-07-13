@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Carousel } from '../components/slider/Carousel';
 import { MoviePoster } from '../components/slider/MoviePoster';
-import { Movie, useNowPlayingQuery } from '../generated/graphql';
+import { useNowPlayingQuery } from '../generated/graphql';
 
 export const NowPlaying = () => {
   const { loading, error, data } = useNowPlayingQuery();
@@ -14,6 +14,7 @@ export const NowPlaying = () => {
   return (
     <Carousel title="Now Playing">
       {movies.map((movie) => (
+        // TODO: fix this type
         <MoviePoster movie={movie} key={movie.id} />
       ))}
     </Carousel>

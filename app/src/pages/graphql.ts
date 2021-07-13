@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+// TODO: create fragment
+
 export const NOW_PLAYING = gql`
   query nowPlaying {
     nowPlaying {
